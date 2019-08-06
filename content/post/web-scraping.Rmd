@@ -2,8 +2,7 @@
 title: Web Scraping in R
 date: 2017-08-18
 author: Andrew Marder
-tags:
-  - R
+tags: ["R"]
 ---
 
 Let's walk through some steps for web scraping with R. At the bottom of [this page](https://www.google.com/patents/US608845) there is a table of references that I want to scrape. Let's use the [rvest](https://github.com/hadley/rvest) package to get the HTML associated with that page:
