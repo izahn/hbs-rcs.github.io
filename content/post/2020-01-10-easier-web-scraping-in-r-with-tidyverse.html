@@ -101,7 +101,9 @@ glimpse(ws_data)</code></pre>
 <p>As simple as it is, the code examples above can be simplified even further by modularizing
 the data processing functions. Here is the whole simplified program for retrieving workshop
 information, in less than 20 lines of code.</p>
-<pre class="r"><code>## function to get lnks from a menu
+<pre class="r"><code>library(tidyverse)
+library(rvest)
+
 get_links &lt;- function(url, css) {
   read_html(url) %&gt;%
     html_nodes(css) %&gt;%
@@ -109,10 +111,8 @@ get_links &lt;- function(url, css) {
             url = html_attr(., &quot;href&quot;))}
 }
 
-## start page
 ws_data &lt;- tibble(start_url = &quot;https://training.rcs.hbs.org/workshops&quot;)
 
-## traverse the website, calling the appropriate function at each level
 ws_data &lt;- ws_data %&gt;%
   mutate(category = map(start_url, get_links, css = &quot;.menu-depth-2 a&quot;)) %&gt;%
   unnest(category, names_sep = &quot;_&quot;, keep_empty = TRUE) %&gt;%

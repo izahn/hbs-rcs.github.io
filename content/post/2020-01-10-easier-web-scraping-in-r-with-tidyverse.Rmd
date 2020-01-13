@@ -104,7 +104,9 @@ the data processing functions. Here is the whole simplified program for retrievi
 information, in less than 20 lines of code.
 
 ```{r}
-## function to get lnks from a menu
+library(tidyverse)
+library(rvest)
+
 get_links <- function(url, css) {
   read_html(url) %>%
     html_nodes(css) %>%
@@ -112,10 +114,8 @@ get_links <- function(url, css) {
             url = html_attr(., "href"))}
 }
 
-## start page
 ws_data <- tibble(start_url = "https://training.rcs.hbs.org/workshops")
 
-## traverse the website, calling the appropriate function at each level
 ws_data <- ws_data %>%
   mutate(category = map(start_url, get_links, css = ".menu-depth-2 a")) %>%
   unnest(category, names_sep = "_", keep_empty = TRUE) %>%
