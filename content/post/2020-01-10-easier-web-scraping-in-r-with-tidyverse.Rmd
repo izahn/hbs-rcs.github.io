@@ -2,12 +2,12 @@
 title: Easier web scraping in R with tidyverse
 author: Ista Zahn
 date: '2020-01-10'
-slug: easier-web-scraping-in-r-with-tidyverse
 categories:
   - R
 tags:
   - R
   - web scraping
+slug: easier-web-scraping-in-r-with-tidyverse
 ---
 
 
@@ -17,7 +17,7 @@ experience, especially for retrieving nested data. In particular, the *nest/unne
 functions in the `tidyr` package make it easy to implement breadth-first scrapers in R by 
 nesting the results from each level and then expanding to a tabular structure. This 
 approach has the advantage of making it easy to follow the program logic, and it also
-makes it much easy to store retrieved values in a convenient format.
+makes it very easy to store retrieved values in a convenient format.
 
 ## Example: HBS workshops
 
@@ -129,7 +129,8 @@ glimpse(ws_data)
 ## Conclusions
 
 The key pattern is `mutate` to a list-column 
-containing a `tibble` and then `unnest`. This expands the data structure as you descend 
+containing `tibbles` and then `unnest` to maintain a tabular record of URLs and results at
+each level. This expands the data structure as you descend 
 through each level, resulting in a nice clean tabular structure at the end. At each level
 `unest(names_sep = "_")` produces a consistent naming scheme with minimal effort. Finally,
 this pattern generalizes easily to cases where you wish to retrieve multiple pieces of 
