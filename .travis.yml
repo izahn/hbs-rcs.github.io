@@ -18,9 +18,12 @@ script:
   - hugo
 
 deploy:
-  provider: pages
-  skip_cleanup: true
+  provider: pages:git
+  edge: true
+  cleanup: false
   deploy_key: deploy_key
+  keep_history: true
+  verbose: true
   on:
     branch: source
   local_dir: public
