@@ -7,6 +7,7 @@ branches:
     - master
 
 before_install:
+  - openssl aes-256-cbc -K $encrypted_093192265120_key -iv $encrypted_093192265120_iv -in deploy_key.enc -out deploy_key -d
   - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.86.1/hugo_extended_0.86.1_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
   - export HUGO_CACHEDIR=/.cache
@@ -19,7 +20,7 @@ script:
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
+  deploy_key: deploy_key
   on:
     branch: source
   local_dir: public
