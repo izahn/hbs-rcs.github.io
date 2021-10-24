@@ -9,8 +9,8 @@ branches:
 before_install:
   - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.55.6/hugo_extended_0.55.6_Linux-64bit.deb
   - sudo dpkg -i /tmp/hugo.deb
-  - sudo hugo mod clean --all
-  - sudo hugo mod tidy
+  - sudo mkdir -p /.cache
+  - export HUGO_CACHEDIR=/.cache
 
 script:
   - hugo
